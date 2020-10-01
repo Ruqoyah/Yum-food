@@ -1,0 +1,13 @@
+language: node_js
+node_js:
+  - 10.16.2
+services:
+  - postgresql
+script:
+  - npm run server:test
+after_success:
+  - CODECLIMATE_REPO_TOKEN=$CODECLIMATE_REPO_TOKEN codeclimate-test-reporter < coverage/lcov.info
+  - npm run coverage
+env:
+  global:
+    - NODE_ENV=test
